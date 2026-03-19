@@ -18,12 +18,12 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
       - name: Deploy
         run: |
-          ssh ubuntu@${{ secrets.SSH_HOST }} "if [ ! -d 'nodeapp' ]; then \
+          ssh ubuntu@${{ secrets.SSH_HOST }} "if [ ! -d 'hello-node-action' ]; then \
               git clone https://github.com/CNSA-2026/hello-node-action.git; \ 
             else \
-              cd nodeapp && git stash && git fetch --all && git reset --hard origin/main && git pull origin main; \
+              cd hello-node-action && git stash && git fetch --all && git reset --hard origin/main && git pull origin main; \
             fi"
           ssh ubuntu@${{ secrets.SSH_HOST }} "if pgrep node; then forever stopall; fi"
-          ssh ubuntu@${{ secrets.SSH_HOST }} "cd nodeapp && npm install"
-          ssh ubuntu@${{ secrets.SSH_HOST }} "cd nodeapp && forever start src/main.js"
+          ssh ubuntu@${{ secrets.SSH_HOST }} "cd hello-node-action && npm install"
+          ssh ubuntu@${{ secrets.SSH_HOST }} "cd hello-node-action && forever start src/main.js"
         
