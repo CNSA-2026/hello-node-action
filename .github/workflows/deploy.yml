@@ -19,7 +19,7 @@ jobs:
       - name: Deploy
         run: |
           ssh ubuntu@${{ secrets.SSH_HOST }} "if [ ! -d 'hello-node-action' ]; then \
-              git clone https://github.com/CNSA-2026/hello-node-action.git; \ 
+              git clone https://github.com/CNSA-2026/hello-node-action.git; \
             else \
               cd hello-node-action && git stash && git fetch --all && git reset --hard origin/main && git pull origin main; \
             fi"
